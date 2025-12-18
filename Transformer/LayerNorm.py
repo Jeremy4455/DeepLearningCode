@@ -15,7 +15,7 @@ class LayerNorm(nn.Module):
         self.eps = eps
         self.elementwise_affine = elementwise_affine
         self.normalized_shape = normalized_shape
-
+        # 是否学习参数 gamma 和 beta
         if self.elementwise_affine:
             self.gamma = nn.Parameter(torch.ones(normalized_shape))
             self.beta = nn.Parameter(torch.zeros(normalized_shape))
