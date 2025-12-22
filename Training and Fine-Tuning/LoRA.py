@@ -6,6 +6,7 @@ import math
 class LoRALayer(nn.modules):
     """
     LoRA 旁路模块
+    在Transformer中，只对Q，V进行LoRA微调
     """
 
     def __init__(self, in_dim, out_dim, rank, alpha):
@@ -13,6 +14,7 @@ class LoRALayer(nn.modules):
         self.lora_A = nn.Linear(in_dim, rank, bias=False)
         self.lora_B = nn.Linear(rank, out_dim, bias=False)
         self.scaling = alpha / rank
+
 
         nn.init.kaiming_normal_(self.lora_A.weight, a=math.sqrt(5))
         nn.init.zeros_(self.lora_B.weight)
